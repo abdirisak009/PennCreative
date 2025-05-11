@@ -1,0 +1,82 @@
+/* Custom cursor styles */
+.custom-cursor-enabled {
+  /* Hide the default cursor when our custom one is active */
+  cursor: none !important;
+}
+
+/* Main cursor dot */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: #01babc;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease;
+}
+
+/* Outer cursor ring */
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  border: 2px solid rgba(1, 186, 188, 0.5); /* #01BABC with transparency */
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transition: width 0.2s ease, height 0.2s ease, transform 0.1s ease;
+  transform: translate(-50%, -50%);
+}
+
+/* Cursor states */
+/* When hovering over links or buttons */
+.cursor-hover .cursor-dot {
+  transform: scale(1.5);
+  background-color: #01babc;
+}
+
+.cursor-hover .cursor-ring {
+  width: 40px;
+  height: 40px;
+  border-color: rgba(1, 186, 188, 0.3);
+}
+
+/* When clicking */
+.cursor-clicking .cursor-dot {
+  transform: scale(0.8);
+  background-color: #01babc;
+}
+
+.cursor-clicking .cursor-ring {
+  width: 25px;
+  height: 25px;
+  border-color: rgba(1, 186, 188, 0.8);
+}
+
+/* When over text */
+.cursor-text .cursor-dot {
+  width: 3px;
+  height: 25px;
+  border-radius: 1px;
+}
+
+.cursor-text .cursor-ring {
+  opacity: 0;
+}
+
+/* For touch devices, disable custom cursor */
+@media (hover: none) and (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+
+  .custom-cursor-enabled {
+    cursor: auto !important;
+  }
+}
