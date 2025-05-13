@@ -9,338 +9,77 @@ import { Input } from "@/components/ui/input"
 import { ExternalLink, Download, Star, Check, Heart, Search } from "lucide-react"
 import Image from "next/image"
 import { PersistentCommunityPopup } from "@/components/persistent-community-popup"
-
-interface Theme {
-  id: string
-  title: string
-  category: string
-  type: string[]
-  description: string
-  image: string
-  features: string[]
-  rating: number
-  downloads: number
-  previewLink: string
-  downloadLink: string
-  badges: string[]
-}
-
-const themes: Theme[] = [
-  // Featured New Theme
-  {
-    id: "medxtore",
-    title: "MedXtore",
-    category: "Pharmacy & Medical",
-    type: ["medical", "ecommerce"],
-    description:
-      "Multipurpose WooCommerce theme for pharmacies, medical stores and healthcare businesses with 26+ demos.",
-    image: "/images/medxtore-theme.png",
-    features: [
-      "26+ Demo Websites",
-      "Elementor Page Builder",
-      "WooCommerce Compatible",
-      "Lightweight & Customizable",
-      "Responsive Design",
-    ],
-    rating: 5.0,
-    downloads: 2480,
-    previewLink:
-      "https://preview.themeforest.net/item/medxtore-pharmacy-and-medical-elementor-woocommerce-theme/full_screen_preview/44388499?_ga=2.1924785.1270657015.1744901495-1044140739.1723891296&_gac=1.85266795.1743366642.Cj0KCQjw16O_BhDNARIsAC3i2GCmfjt_mws-ONuG5tO89GZ3kT4S26CXVLTRuUBW6KNUOm1s7bRF840aAtMkEALw_wcB",
-    downloadLink: "https://mega.nz/file/zIFWDLCY#RxXjbaAldjokNAgs9NI2s-yXtB2Ix3jZ3dX7aKUjI24",
-    badges: ["Hot", "Featured"],
-  },
-
-  // Medical Themes
-  {
-    id: "meditest",
-    title: "Meditest",
-    category: "Health & Medical",
-    type: ["medical"],
-    description:
-      "Modern WordPress theme for hospitals, clinics, and healthcare services with appointment booking system.",
-    image: "/images/meditest-theme.png",
-    features: ["3 Pre-Built Demos", "Elementor Page Builder", "WooCommerce Compatible", "Appointment Booking"],
-    rating: 5.0,
-    downloads: 1240,
-    previewLink: "https://shorturl.at/oM3CO",
-    downloadLink: "https://mega.nz/file/PEJ0zQCS#vXBTkYiF7Bdez7G8nGAxDURVn99DNVpd7dhBsjE8VAA",
-    badges: ["Featured", "Medical"],
-  },
-  {
-    id: "doctio",
-    title: "Doctio",
-    category: "Medical Health",
-    type: ["medical"],
-    description: "Comprehensive WordPress theme for doctors, hospitals, clinics and all types of healthcare services.",
-    image: "/images/doctio-theme.png",
-    features: ["Multiple Medical Demos", "Doctor Profiles", "Appointment Booking", "Online Consultation"],
-    rating: 4.9,
-    downloads: 980,
-    previewLink:
-      "https://preview.themeforest.net/item/doctio-medical-health-wordpress-theme/full_screen_preview/38283662?_ga=2.2464176.1270657015.1744901495-1044140739.1723891296&_gac=1.190258777.1743366642.Cj0KCQjw16O_BhDNARIsAC3i2GCmfjt_mws-ONuG5tO89GZ3kT4S26CXVLTRuUBW6KNUOm1s7bRF840aAtMkEALw_wcB",
-    downloadLink: "https://mega.nz/file/Vx5FmJiY#QOWXFK0GbfJ2qLPacXG568FkfyxGQEcH-Labwak6f2A",
-    badges: ["Medical", "Popular"],
-  },
-  {
-    id: "medizin",
-    title: "Medizin",
-    category: "Medical WooCommerce",
-    type: ["medical", "ecommerce"],
-    description: "Clean and modern WordPress theme for medical stores, pharmacies, and healthcare businesses.",
-    image: "/images/medizin-theme.png",
-    features: ["WooCommerce Ready", "Medical Store Layouts", "Appointment System", "Product Filtering"],
-    rating: 4.8,
-    downloads: 1150,
-    previewLink:
-      "https://preview.themeforest.net/item/medizin-medical-woocommerce-theme/full_screen_preview/26538545?_ga=2.60652845.1270657015.1744901495-1044140739.1723891296&_gac=1.82163172.1743366642.Cj0KCQjw16O_BhDNARIsAC3i2GCmfjt_mws-ONuG5tO89GZ3kT4S26CXVLTRuUBW6KNUOm1s7bRF840aAtMkEALw_wcB",
-    downloadLink: "https://mega.nz/file/fRlVABSC#MNyPSw4MIGeOmrvVoDH2sHVZ71YiWKMhHfbVQ3l2qyI",
-    badges: ["Medical", "eCommerce"],
-  },
-  {
-    id: "dentcare",
-    title: "DentCare",
-    category: "Dental Clinic",
-    type: ["medical"],
-    description: "Specialized WordPress theme for dentists, orthodontists and dental clinics with service showcase.",
-    image: "/placeholder.svg?height=300&width=600",
-    features: ["Dental Appointment System", "Before/After Gallery", "Service Showcase", "Patient Testimonials"],
-    rating: 4.8,
-    downloads: 890,
-    previewLink: "https://shorturl.at/oM3CO",
-    downloadLink: "https://mega.nz/file/PEJ0zQCS#vXBTkYiF7Bdez7G8nGAxDURVn99DNVpd7dhBsjE8VAA",
-    badges: ["Dental", "New"],
-  },
-  {
-    id: "dentalist",
-    title: "Dentalist",
-    category: "Dental Clinic",
-    type: ["medical"],
-    description:
-      "Modern WordPress theme for dentists, dental clinics and practices with appointment booking and patient management.",
-    image: "/placeholder.svg?height=300&width=600",
-    features: [
-      "Online Appointment Booking",
-      "Dental Services Showcase",
-      "Team Members Profiles",
-      "Patient Testimonials",
-    ],
-    rating: 4.9,
-    downloads: 1250,
-    previewLink: "https://dentalist.cmsmasters.net/?storefront=envato-elements",
-    downloadLink: "https://mega.nz/file/nBgGBSCB#UDWMIL4Vv_YxxOGbZvpwPr_1rYUd26ZqYK--ygtFpGs",
-    badges: ["Dental", "Featured"],
-  },
-  {
-    id: "pharmaplus",
-    title: "PharmaPLUS",
-    category: "Pharmacy",
-    type: ["medical"],
-    description: "Complete WordPress solution for pharmacies and drugstores with product catalog and online ordering.",
-    image: "/placeholder.svg?height=300&width=600",
-    features: ["Product Catalog", "Prescription Upload", "Store Locator", "Medication Reminder"],
-    rating: 4.7,
-    downloads: 760,
-    previewLink: "https://shorturl.at/oM3CO",
-    downloadLink: "https://mega.nz/file/PEJ0zQCS#vXBTkYiF7Bdez7G8nGAxDURVn99DNVpd7dhBsjE8VAA",
-    badges: ["Pharmacy", "eCommerce"],
-  },
-
-  // Education Themes
-  {
-    id: "edulearn",
-    title: "EduLearn",
-    category: "Education",
-    type: ["education"],
-    description:
-      "Complete LMS WordPress theme for schools, colleges and online course platforms with student dashboard.",
-    image: "/placeholder.svg?height=300&width=600",
-    features: ["Course Management", "Student Dashboard", "Quiz System", "Certificate Generator"],
-    rating: 4.9,
-    downloads: 1350,
-    previewLink: "https://shorturl.at/oM3CO",
-    downloadLink: "https://mega.nz/file/PEJ0zQCS#vXBTkYiF7Bdez7G8nGAxDURVn99DNVpd7dhBsjE8VAA",
-    badges: ["Education", "Featured"],
-  },
-  {
-    id: "academix",
-    title: "Academix",
-    category: "University",
-    type: ["education"],
-    description: "Professional WordPress theme for universities and colleges with department and faculty pages.",
-    image: "/placeholder.svg?height=300&width=600",
-    features: ["Faculty Profiles", "Event Calendar", "Course Catalog", "Campus Map"],
-    rating: 4.7,
-    downloads: 920,
-    previewLink: "https://shorturl.at/oM3CO",
-    downloadLink: "https://mega.nz/file/PEJ0zQCS#vXBTkYiF7Bdez7G8nGAxDURVn99DNVpd7dhBsjE8VAA",
-    badges: ["Education", "University"],
-  },
-
-  // Portfolio Themes
-  {
-    id: "creativo",
-    title: "Creativo",
-    category: "Creative Portfolio",
-    type: ["portfolio"],
-    description: "Stunning WordPress portfolio theme for creatives, designers, photographers and artists.",
-    image: "/placeholder.svg?height=300&width=600",
-    features: ["Project Showcase", "Filterable Gallery", "Video Integration", "Parallax Effects"],
-    rating: 4.8,
-    downloads: 1120,
-    previewLink: "https://shorturl.at/oM3CO",
-    downloadLink: "https://mega.nz/file/PEJ0zQCS#vXBTkYiF7Bdez7G8nGAxDURVn99DNVpd7dhBsjE8VAA",
-    badges: ["Portfolio", "Creative"],
-  },
-  {
-    id: "fotografy",
-    title: "Fotografy",
-    category: "Photography",
-    type: ["portfolio"],
-    description: "Elegant WordPress theme for photographers and visual artists with beautiful gallery layouts.",
-    image: "/placeholder.svg?height=300&width=600",
-    features: ["Photo Gallery", "Client Proofing", "Password Protection", "Lightbox Viewer"],
-    rating: 4.9,
-    downloads: 980,
-    previewLink: "https://shorturl.at/oM3CO",
-    downloadLink: "https://mega.nz/file/PEJ0zQCS#vXBTkYiF7Bdez7G8nGAxDURVn99DNVpd7dhBsjE8VAA",
-    badges: ["Portfolio", "Photography"],
-  },
-
-  // Ecommerce Themes
-  {
-    id: "shopify",
-    title: "Shopify",
-    category: "Online Store",
-    type: ["ecommerce"],
-    description: "Powerful WooCommerce WordPress theme for online stores with advanced product filtering.",
-    image: "/placeholder.svg?height=300&width=600",
-    features: ["Product Filtering", "Wishlist", "Quick View", "Ajax Cart"],
-    rating: 4.8,
-    downloads: 1560,
-    previewLink: "https://shorturl.at/oM3CO",
-    downloadLink: "https://mega.nz/file/PEJ0zQCS#vXBTkYiF7Bdez7G8nGAxDURVn99DNVpd7dhBsjE8VAA",
-    badges: ["eCommerce", "Popular"],
-  },
-  {
-    id: "fashionista",
-    title: "Fashionista",
-    category: "Fashion Store",
-    type: ["ecommerce"],
-    description: "Stylish WordPress theme for fashion and clothing stores with lookbook feature.",
-    image: "/placeholder.svg?height=300&width=600",
-    features: ["Lookbook", "Size Guide", "Instagram Shop", "Product Quick View"],
-    rating: 4.7,
-    downloads: 1240,
-    previewLink: "https://shorturl.at/oM3CO",
-    downloadLink: "https://mega.nz/file/PEJ0zQCS#vXBTkYiF7Bdez7G8nGAxDURVn99DNVpd7dhBsjE8VAA",
-    badges: ["eCommerce", "Fashion"],
-  },
-
-  // Restaurant Themes
-  {
-    id: "gustoso",
-    title: "Gustoso",
-    category: "Restaurant",
-    type: ["restaurant"],
-    description:
-      "Appetizing WordPress theme for restaurants, cafes and food businesses with menu and reservation system.",
-    image: "/placeholder.svg?height=300&width=600",
-    features: ["Food Menu", "Table Reservation", "Opening Hours", "Chef Profiles"],
-    rating: 4.9,
-    downloads: 1080,
-    previewLink: "https://shorturl.at/oM3CO",
-    downloadLink: "https://mega.nz/file/PEJ0zQCS#vXBTkYiF7Bdez7G8nGAxDURVn99DNVpd7dhBsjE8VAA",
-    badges: ["Restaurant", "Featured"],
-  },
-  {
-    id: "pizzaro",
-    title: "Pizzaro",
-    category: "Pizza Restaurant",
-    type: ["restaurant"],
-    description: "Delicious WordPress theme for pizza restaurants and delivery services with online ordering.",
-    image: "/placeholder.svg?height=300&width=600",
-    features: ["Online Ordering", "Delivery Tracking", "Menu Builder", "Location Finder"],
-    rating: 4.6,
-    downloads: 890,
-    previewLink: "https://shorturl.at/oM3CO",
-    downloadLink: "https://mega.nz/file/PEJ0zQCS#vXBTkYiF7Bdez7G8nGAxDURVn99DNVpd7dhBsjE8VAA",
-    badges: ["Restaurant", "Food Delivery"],
-  },
-
-  // Business Themes
-  {
-    id: "corporato",
-    title: "Corporato",
-    category: "Corporate Business",
-    type: ["business"],
-    description:
-      "Professional WordPress theme for corporate businesses, agencies and enterprises with service showcase.",
-    image: "/placeholder.svg?height=300&width=600",
-    features: ["Service Showcase", "Team Members", "Testimonials", "Case Studies"],
-    rating: 4.8,
-    downloads: 1320,
-    previewLink: "https://shorturl.at/oM3CO",
-    downloadLink: "https://mega.nz/file/PEJ0zQCS#vXBTkYiF7Bdez7G8nGAxDURVn99DNVpd7dhBsjE8VAA",
-    badges: ["Business", "Corporate"],
-  },
-  {
-    id: "consulto",
-    title: "Consulto",
-    category: "Consulting",
-    type: ["business"],
-    description: "Premium WordPress theme for consultants, advisors and professional service providers.",
-    image: "/placeholder.svg?height=300&width=600",
-    features: ["Service Pages", "Case Studies", "Client Portal", "Appointment Booking"],
-    rating: 4.7,
-    downloads: 980,
-    previewLink: "https://shorturl.at/oM3CO",
-    downloadLink: "https://mega.nz/file/PEJ0zQCS#vXBTkYiF7Bdez7G8nGAxDURVn99DNVpd7dhBsjE8VAA",
-    badges: ["Business", "Consulting"],
-  },
-
-  // NGO Themes
-  {
-    id: "charito",
-    title: "Charito",
-    category: "Charity",
-    type: ["ngo"],
-    description:
-      "Inspiring WordPress theme for charities, nonprofits and fundraising organizations with donation system.",
-    image: "/placeholder.svg?height=300&width=600",
-    features: ["Donation System", "Event Management", "Volunteer Registration", "Cause Pages"],
-    rating: 4.9,
-    downloads: 1150,
-    previewLink: "https://shorturl.at/oM3CO",
-    downloadLink: "https://mega.nz/file/PEJ0zQCS#vXBTkYiF7Bdez7G8nGAxDURVn99DNVpd7dhBsjE8VAA",
-    badges: ["NGO", "Charity"],
-  },
-  {
-    id: "environo",
-    title: "Environo",
-    category: "Environmental",
-    type: ["ngo"],
-    description: "Eco-friendly WordPress theme for environmental organizations and green initiatives.",
-    image: "/placeholder.svg?height=300&width=600",
-    features: ["Campaign Pages", "Donation System", "Event Calendar", "Volunteer Management"],
-    rating: 4.7,
-    downloads: 860,
-    previewLink: "https://shorturl.at/oM3CO",
-    downloadLink: "https://mega.nz/file/PEJ0zQCS#vXBTkYiF7Bdez7G8nGAxDURVn99DNVpd7dhBsjE8VAA",
-    badges: ["NGO", "Environmental"],
-  },
-]
+import { Theme } from "@/models/Theme"
 
 export default function ThemesPage() {
   const [activeTab, setActiveTab] = useState("all")
   const [searchQuery, setSearchQuery] = useState("")
-  const [filteredThemes, setFilteredThemes] = useState(themes)
+  const [themes, setThemes] = useState<Theme[]>([])
+  const [filteredThemes, setFilteredThemes] = useState<Theme[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    console.log("Component mounted, fetching themes...")
+    fetchThemes()
+  }, [])
+
+  const fetchThemes = async () => {
+    try {
+      console.log("Starting to fetch themes...")
+      setIsLoading(true)
+      setError(null)
+
+      const response = await fetch("/api/themes", {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      console.log("API Response status:", response.status)
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const data = await response.json()
+      console.log("Received themes data:", data)
+
+      if (!Array.isArray(data)) {
+        console.error("Received data is not an array:", data)
+        throw new Error("Expected an array of themes")
+      }
+
+      if (data.length === 0) {
+        console.log("No themes found in the response")
+      } else {
+        console.log(`Successfully fetched ${data.length} themes`)
+      }
+
+      setThemes(data)
+      setFilteredThemes(data)
+      setError(null)
+    } catch (error) {
+      console.error("Error in fetchThemes:", error)
+      setError(error instanceof Error ? error.message : "Failed to fetch themes")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    console.log("Filtering themes...")
+    console.log("Active tab:", activeTab)
+    console.log("Search query:", searchQuery)
+    console.log("Total themes:", themes.length)
+
     let result = themes
 
     // Filter by tab category
     if (activeTab !== "all") {
       result = result.filter((theme) => theme.type.includes(activeTab))
+      console.log(`Filtered by tab ${activeTab}:`, result.length)
     }
 
     // Filter by search query
@@ -351,12 +90,47 @@ export default function ThemesPage() {
           theme.title.toLowerCase().includes(query) ||
           theme.description.toLowerCase().includes(query) ||
           theme.category.toLowerCase().includes(query) ||
-          theme.features.some((feature) => feature.toLowerCase().includes(query)),
+          theme.features.some((feature) => feature.toLowerCase().includes(query))
       )
+      console.log(`Filtered by search "${searchQuery}":`, result.length)
     }
 
+    console.log("Final filtered themes:", result.length)
     setFilteredThemes(result)
-  }, [activeTab, searchQuery])
+  }, [activeTab, searchQuery, themes])
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-[#01BABC] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">Loading themes...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+          <h3 className="text-xl font-bold mb-2 text-red-600">Error Loading Themes</h3>
+          <p className="text-gray-600 dark:text-gray-300 mb-4">{error}</p>
+          <Button
+            className="bg-[#01BABC] hover:bg-[#01BABC]/80 text-white"
+            onClick={fetchThemes}
+          >
+            Try Again
+          </Button>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <main className="flex min-h-screen flex-col">
@@ -607,34 +381,33 @@ export default function ThemesPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {filteredThemes.map((theme) => (
                     <Card
-                      key={theme.id}
+                      key={theme._id}
                       className="group overflow-hidden border-0 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 dark:bg-[#122C39] dark:border-[#01BABC]/10 h-full flex flex-col"
                     >
                       <div className="relative overflow-hidden">
                         <div className="aspect-[16/9] relative overflow-hidden bg-gray-100 dark:bg-[#0C1E28]/50">
                           <Image
                             src={theme.image || "/placeholder.svg"}
-                            alt={theme.title}
+                            alt={theme.title || 'Untitled Theme'}
                             fill
                             className="object-cover transition-transform duration-500 group-hover:scale-105"
                           />
                         </div>
 
                         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 max-w-[80%]">
-                          {theme.badges.map((badge, index) => (
+                          {(theme.badges || []).map((badge, index) => (
                             <Badge
                               key={index}
                               className={`
-                                ${
-                                  badge === "Featured"
-                                    ? "bg-purple-500 hover:bg-purple-600"
-                                    : badge === "New"
-                                      ? "bg-blue-500 hover:bg-blue-600"
-                                      : badge === "Popular"
-                                        ? "bg-orange-500 hover:bg-orange-600"
-                                        : badge === "Hot"
-                                          ? "bg-red-500 hover:bg-red-600"
-                                          : "bg-green-500 hover:bg-green-600"
+                                ${badge === "Featured"
+                                  ? "bg-purple-500 hover:bg-purple-600"
+                                  : badge === "New"
+                                    ? "bg-blue-500 hover:bg-blue-600"
+                                    : badge === "Popular"
+                                      ? "bg-orange-500 hover:bg-orange-600"
+                                      : badge === "Hot"
+                                        ? "bg-red-500 hover:bg-red-600"
+                                        : "bg-green-500 hover:bg-green-600"
                                 }
                               `}
                             >
@@ -650,7 +423,7 @@ export default function ThemesPage() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
                           <div className="flex items-center gap-1 text-white">
                             <Download size={14} />
-                            <span className="text-sm">{theme.downloads.toLocaleString()}</span>
+                            <span className="text-sm">{(theme.downloads || 0).toLocaleString()}</span>
                           </div>
                           <div className="flex items-center gap-1 text-white">
                             {[...Array(5)].map((_, i) => (
@@ -658,11 +431,11 @@ export default function ThemesPage() {
                                 key={i}
                                 size={14}
                                 className={
-                                  i < Math.floor(theme.rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-400"
+                                  i < Math.floor(theme.rating || 0) ? "fill-yellow-400 text-yellow-400" : "text-gray-400"
                                 }
                               />
                             ))}
-                            <span className="text-sm ml-1">{theme.rating}</span>
+                            <span className="text-sm ml-1">{theme.rating || 0}</span>
                           </div>
                         </div>
                       </div>
@@ -671,9 +444,9 @@ export default function ThemesPage() {
                         <div className="flex justify-between items-start mb-2">
                           <div>
                             <h3 className="text-xl font-bold dark:text-white group-hover:text-[#01BABC] transition-colors">
-                              {theme.title}
+                              {theme.title || 'Untitled Theme'}
                             </h3>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">{theme.category}</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">{theme.category || 'Uncategorized'}</p>
                           </div>
                           <button className="text-gray-400 hover:text-red-500 transition-colors">
                             <Heart size={18} />
@@ -681,20 +454,20 @@ export default function ThemesPage() {
                         </div>
 
                         <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
-                          {theme.description}
+                          {theme.description || 'No description available'}
                         </p>
 
                         <div className="space-y-1.5">
-                          {theme.features.slice(0, 3).map((feature, index) => (
+                          {(theme.features || []).slice(0, 3).map((feature, index) => (
                             <div key={index} className="flex items-start gap-2">
                               <Check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
                               <span className="text-gray-600 dark:text-gray-300 text-xs">{feature}</span>
                             </div>
                           ))}
-                          {theme.features.length > 3 && (
+                          {(theme.features || []).length > 3 && (
                             <div className="flex items-start gap-2">
                               <span className="text-gray-500 dark:text-gray-400 text-xs">
-                                +{theme.features.length - 3} more features
+                                +{(theme.features || []).length - 3} more features
                               </span>
                             </div>
                           )}
@@ -703,13 +476,13 @@ export default function ThemesPage() {
 
                       <CardFooter className="p-5 pt-0 flex gap-2 mt-auto">
                         <Button className="w-1/2 bg-[#01BABC] hover:bg-[#01BABC]/80 text-white" size="sm" asChild>
-                          <a href={theme.previewLink} target="_blank" rel="noopener noreferrer">
+                          <a href={theme.previewLink || '#'} target="_blank" rel="noopener noreferrer">
                             <ExternalLink size={14} className="mr-1.5" />
                             Preview
                           </a>
                         </Button>
                         <Button className="w-1/2 bg-green-600 hover:bg-green-700 text-white" size="sm" asChild>
-                          <a href={theme.downloadLink} target="_blank" rel="noopener noreferrer">
+                          <a href={theme.downloadLink || '#'} target="_blank" rel="noopener noreferrer">
                             <Download size={14} className="mr-1.5" />
                             Download
                           </a>
